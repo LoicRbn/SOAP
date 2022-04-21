@@ -6,7 +6,7 @@ $login="root";
 $pwd="";
 $base="recette";
 //connexion au serveur
-$connexion=mysqli_connect($hote, $login, $pwd, $base) or die ("Erreur connexion ! ".mysqli_connect_error());
+$connexion=mysql_connect($hote, $login, $pwd, $base) or die ("Erreur connexion ! ".mysqli_connect_error());
 
 function showRecipe(){
   $query="SELECT * FROM recette";
