@@ -1,14 +1,21 @@
 <?php
-// connexion a la base de donnee
+function connect(){
+  // connexion a la base de donnee
 
-$hote="localhost";
-$login="root";
-$pwd="";
-$base="recette";
-//connexion au serveur
-$connexion=mysql_connect($hote, $login, $pwd, $base) or die ("Erreur connexion ! ".mysqli_connect_error());
+  $hote="localhost";
+  $login="root";
+  $pwd="";
+  $base="recette";
+  //connexion au serveur
+  //$connexion=mysql_connect($hote, $login, $pwd, $base) or die ("Erreur connexion ! ".mysql_error());
+
+  $connexion = new PDO("mysql:host=$hote;dbname=$base", $login, $pwd, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
+  $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}
+
 
 function showRecipe(){
+  connect();
   $query="SELECT * FROM recette";
   $result=mysqli_query($connexion, $query) or die ('ERREUR '.mysqli_error());
   $info = mysqli_fetch_array($result);
