@@ -1,20 +1,39 @@
 <?xml version='1.0' encoding='UTF-8'?>
   <definitions name="exemple" targetNamespace="urn:exemple" xmlns:typens="urn:exemple" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-  xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:typens0="http://localhost/projet/accessServer.php">
+  xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:typens0="http://localhost/projet/connect.php">
     <message name="showRecipe"/>
     <message name="showRecipeResponse">
       <part name="showRecipeReturn"/>
+    </message>
+    <message name="deleteRecipe"/>
+    <message name="deleteRecipeResponse">
+      <part name="deleteRecipeReturn"/>
     </message>
     <portType name="essai_instancePortType">
       <operation name="showRecipe">
         <input message="typens:showRecipe"/>
         <output message="typens:showRecipeResponse"/>
       </operation>
+      <operation name="deleteRecipe">
+        <input message="typens:deleteRecipe"/>
+        <output message="typens:deleteRecipeResponse"/>
+      </operation>
     </portType>
     <binding name="essai_instanceBinding" type="typens:essai_instancePortType">
       <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
       <operation name="showRecipe">
+        <soap:operation soapAction="urn:essai_instanceAction"/>
+        <input>
+          <soap:body namespace="urn:exemple" use="encoded"
+          encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+        </input>
+        <output>
+          <soap:body namespace="urn:exemple" use="encoded"
+          encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+        </output>
+      </operation>
+      <operation name="deleteRecipe">
         <soap:operation soapAction="urn:essai_instanceAction"/>
         <input>
           <soap:body namespace="urn:exemple" use="encoded"

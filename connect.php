@@ -7,19 +7,20 @@ function connect(){
   $pwd="";
   $base="recette";
   //connexion au serveur
-  //$connexion=mysql_connect($hote, $login, $pwd, $base) or die ("Erreur connexion ! ".mysql_error());
-
   $connexion = new PDO("mysql:host=$hote;dbname=$base", $login, $pwd, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
   $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 
 
 function showRecipe(){
-  connect();
+  $conn = connect();
   $query="SELECT * FROM recette";
-  $result=mysqli_query($connexion, $query) or die ('ERREUR '.mysqli_error());
-  $info = mysqli_fetch_array($result);
-  echo "Id :".$info["id"]."\nNom : ".$info["nom"]."\nDescription : ".$info["description"];
+  $result = $conn->prepare($query);
+  $result->execute();
+  $ligne = $result->fetch(PDO::FETCH_ASSOC);
+  while($ligne){
+      echo "Id :".$ligne["id"]."\nNom : ".$ligne["nom"]."\nDescription : ".$ligne["description"];
+  }
 }
 
 // test
