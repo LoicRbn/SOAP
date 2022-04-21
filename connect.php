@@ -12,15 +12,13 @@ or die ("Erreur connexion ! ".mysqli_connect_error());
 function showRecipe(){
   $query="SELECT * FROM recette";
   $result=mysqli_query($connexion, $query) or die ('ERREUR '.mysqli_error());
-  $info = mysqli_fetch_array($connec);
+  $info = mysqli_fetch_array($result);
   echo "Id :".$info["id"]."\nNom : ".$info["nom"]."\nDescription : ".$info["description"];
 }
 
-function addRecipte(){
-
-}
-
-function deleteRecipe(){
-  
+function deleteRecipe(id){
+  $query="DELETE FROM recette WHERE id = ".$id;
+  $result=mysqli_query($connexion, $query) or die ('ERREUR '.mysqli_error());
+  echo "Recette ".$id." supprimée";
 }
  ?>
