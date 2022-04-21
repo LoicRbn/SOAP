@@ -21,4 +21,13 @@ function deleteRecipe(id){
   $result=mysqli_query($connexion, $query) or die ('ERREUR '.mysqli_error());
   echo "Recette ".$id." supprimée";
 }
+
+ini_set('soap.wsdl_cache_enabled', 0);
+
+$serversoap=new SoapServer("http://localhost/projet/Server.wsdl");
+
+$serversoap->addFunction("showRecipe");
+$serversoap->addFunction("deleteRecipe");
+$serversoap->handle();
+
  ?>
