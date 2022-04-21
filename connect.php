@@ -11,7 +11,7 @@ function connect(){
   $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 
-
+// fonction qui affiche toutes les recettes
 function showRecipe(){
   $conn = connect();
   $query="SELECT * FROM recette";
@@ -26,6 +26,7 @@ function showRecipe(){
 // test
 showRecipe();
 
+// fonction qui delete une recette avec son ID
 function deleteRecipe($id){
   $query="DELETE FROM recette WHERE id = ".$id;
   $result=mysqli_query($connexion, $query) or die ('ERREUR '.mysqli_error());
